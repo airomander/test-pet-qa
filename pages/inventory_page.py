@@ -16,6 +16,14 @@ class InventoryPage:
     def item_count(self) -> int:
         return self.inventory_items.count()
 
+    @property
+    def cart_badge_count(self) -> int:
+        return int(self.shopping_cart_badge.text_content())
+
+    @property
+    def is_cart_badge_visible(self) -> bool:
+        return self.shopping_cart_badge.is_visible()
+
     def add_item_to_cart(self, item_name: str) -> None:
         item = self.page.locator("[data-test='inventory-item']", has_text=item_name)
         item.locator("[data-test*='add-to-cart']").click()
