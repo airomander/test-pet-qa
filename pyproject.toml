@@ -28,4 +28,5 @@ testpaths = ["tests"]
 markers = [
     "smoke: smoke tests (critical path)",
     "regression: full regression suite",
+    "requires_api_key: test requires valid SAUCE_REQRES_API_KEY",
 ]

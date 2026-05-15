@@ -1,5 +1,4 @@
 import pytest
-from requests import HTTPError
 
 from api_clients.reqres_client import ReqResClient
 from schemas.user import (
@@ -12,6 +11,7 @@ from schemas.user import (
 )
 
 
+@pytest.mark.requires_api_key
 class TestUsers:
     def test_list_users(self, api_client: ReqResClient) -> None:
         response = api_client.list_users(page=2)

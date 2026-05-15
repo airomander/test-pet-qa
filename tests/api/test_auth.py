@@ -1,10 +1,10 @@
 import pytest
-from requests import HTTPError
 
 from api_clients.reqres_client import ReqResClient
 from schemas.user import LoginResponse, RegisterResponse
 
 
+@pytest.mark.requires_api_key
 class TestAuth:
     def test_login_successful(self, api_client: ReqResClient) -> None:
         response = api_client.login(email="eve.holt@reqres.in", password="cityslicka")

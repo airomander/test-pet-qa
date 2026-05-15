@@ -67,7 +67,10 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Run API tests
+      - name: Install Playwright browsers
+        run: poetry run playwright install chromium
+
+      - name: Run API tests (health-check auto-skips if key is invalid)
         run: poetry run pytest tests/api/ -v --alluredir=allure-results
 
       - name: Upload allure results
