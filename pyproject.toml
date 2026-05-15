@@ -1,0 +1,28 @@
+[project]
+name = "qa-automation-saucedemo"
+version = "0.1.0"
+description = "Pet-project: automated tests for SauceDemo (Playwright + pytest)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest>=8",
+    "pytest-playwright>=0.6",
+    "playwright>=1.52",
+    "requests>=2",
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "allure-pytest>=2",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[tool.poetry]
+package-mode = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "smoke: smoke tests (critical path)",
+    "regression: full regression suite",
+]
