@@ -1,0 +1,8 @@
+[
+  {"first_name": "Roman", "last_name": "Savchenko", "postal_code": "400001", "valid": true},
+  {"first_name": "", "last_name": "Savchenko", "postal_code": "400001", "valid": false, "error": "First Name is required"},
+  {"first_name": "Roman", "last_name": "", "postal_code": "400001", "valid": false, "error": "Last Name is required"},
+  {"first_name": "Roman", "last_name": "Savchenko", "postal_code": "", "valid": false, "error": "Postal Code is required"},
+  {"first_name": "A", "last_name": "B", "postal_code": "1", "valid": true},
+  {"first_name": "Roman-Roman Roman", "last_name": "Savchenko-Savchenko", "postal_code": "400001 400002", "valid": true}
+]
