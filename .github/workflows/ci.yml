@@ -98,11 +98,16 @@ jobs:
           path: allure-results-download
           merge-multiple: true
 
+      - name: Install Allure CLI
+        run: |
+          curl -sLO https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
+          tar -xzf allure-2.33.0.tgz
+          echo "$PWD/allure-2.33.0/bin" >> $GITHUB_PATH
+
       - name: Generate Allure report
-        uses: simple-elf/allure-report-action@v1.11
-        with:
-          allure_results: allure-results-download
-          allure_history: allure-history
+        run: |
+          mkdir -p allure-history
+          allure generate allure-results-download --clean -o allure-history
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
