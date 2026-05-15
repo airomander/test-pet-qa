@@ -12,6 +12,7 @@ dependencies = [
     "pydantic>=2",
     "pydantic-settings>=2",
     "allure-pytest>=2",
+    "pytest-shard>=0.1",
 ]
 
 [project.optional-dependencies]

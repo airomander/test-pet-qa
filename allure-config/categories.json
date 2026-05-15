@@ -1,0 +1,24 @@
+[
+  {
+    "name": "UI Tests",
+    "messageRegex": ".*",
+    "matchedStatuses": ["failed", "broken"],
+    "traceRegex": ".*playwright.*"
+  },
+  {
+    "name": "API Tests",
+    "messageRegex": ".*",
+    "matchedStatuses": ["failed", "broken"],
+    "traceRegex": ".*requests.*"
+  },
+  {
+    "name": "Skipped (known bug)",
+    "messageRegex": ".*",
+    "matchedStatuses": ["skipped"]
+  },
+  {
+    "name": "Product defects",
+    "messageRegex": ".*",
+    "matchedStatuses": ["failed"]
+  }
+]

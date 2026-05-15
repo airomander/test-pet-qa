@@ -1,7 +1,7 @@
-import time
 from pathlib import Path
 from typing import Generator
 
+import allure
 import pytest
 from playwright.sync_api import Browser, Page, sync_playwright
 
@@ -52,7 +52,9 @@ def pytest_runtest_makereport(item, call):
     if report.when == "call" and report.failed:
         if "page" in item.funcargs:
             page = item.funcargs["page"]
-            screenshots_dir = Path("screenshots")
-            screenshots_dir.mkdir(exist_ok=True)
-            timestamp = int(time.time())
-            page.screenshot(path=str(screenshots_dir / f"{item.name}_{timestamp}.png"))
+            screenshot = page.screenshot()
+            allure.attach(
+                screenshot,
+                name=f"{item.name}.png",
+                attachment_type=allure.attachment_type.PNG,
+            )

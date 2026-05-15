@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 
@@ -10,12 +11,15 @@ class LoginPage:
         self.error_message = page.locator("[data-test='error']")
 
     def go_to(self) -> None:
-        self.page.goto("/")
+        with allure.step("Open login page"):
+            self.page.goto("/")
 
     def login(self, username: str, password: str) -> None:
-        self.username_input.fill(username)
-        self.password_input.fill(password)
-        self.login_button.click()
+        with allure.step(f"Login as '{username}'"):
+            self.username_input.fill(username)
+            self.password_input.fill(password)
+            self.login_button.click()
 
     def get_error_text(self) -> str:
-        return self.error_message.text_content()
+        with allure.step("Get login error message"):
+            return self.error_message.text_content()

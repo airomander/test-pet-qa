@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page, expect
 
 
@@ -12,18 +13,22 @@ class CheckoutStepOnePage:
         self.error_message = page.locator("[data-test='error']")
 
     def fill_details(self, first_name: str, last_name: str, postal_code: str) -> None:
-        self.first_name_input.fill(first_name)
-        self.last_name_input.fill(last_name)
-        self.postal_code_input.fill(postal_code)
+        with allure.step(f"Fill checkout form: {first_name} {last_name}, {postal_code}"):
+            self.first_name_input.fill(first_name)
+            self.last_name_input.fill(last_name)
+            self.postal_code_input.fill(postal_code)
 
     def continue_checkout(self) -> None:
-        self.continue_button.click()
+        with allure.step("Continue checkout"):
+            self.continue_button.click()
 
     def cancel(self) -> None:
-        self.cancel_button.click()
+        with allure.step("Cancel checkout"):
+            self.cancel_button.click()
 
     def get_error_text(self) -> str:
-        return self.error_message.text_content()
+        with allure.step("Get checkout error"):
+            return self.error_message.text_content()
 
 
 class CheckoutStepTwoPage:
@@ -37,16 +42,20 @@ class CheckoutStepTwoPage:
         self.cancel_button = page.locator("[data-test='cancel']")
 
     def finish(self) -> None:
-        self.finish_button.click()
+        with allure.step("Finish order"):
+            self.finish_button.click()
 
     def cancel(self) -> None:
-        self.cancel_button.click()
+        with allure.step("Cancel from overview"):
+            self.cancel_button.click()
 
     def get_item_names(self) -> list[str]:
-        return self.summary_items.locator("[data-test='inventory-item-name']").all_text_contents()
+        with allure.step("Get order summary item names"):
+            return self.summary_items.locator("[data-test='inventory-item-name']").all_text_contents()
 
     def should_have_item_count(self, count: int) -> None:
-        expect(self.summary_items).to_have_count(count)
+        with allure.step(f"Check order has {count} item(s)"):
+            expect(self.summary_items).to_have_count(count)
 
 
 class CheckoutCompletePage:
@@ -57,7 +66,9 @@ class CheckoutCompletePage:
         self.back_home_button = page.locator("[data-test='back-to-products']")
 
     def back_home(self) -> None:
-        self.back_home_button.click()
+        with allure.step("Back to products"):
+            self.back_home_button.click()
 
     def should_have_success_message(self) -> None:
-        expect(self.complete_header).to_have_text("Thank you for your order!")
+        with allure.step("Check order success message"):
+            expect(self.complete_header).to_have_text("Thank you for your order!")

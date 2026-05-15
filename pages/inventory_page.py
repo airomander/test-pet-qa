@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 
@@ -25,8 +26,10 @@ class InventoryPage:
         return self.shopping_cart_badge.is_visible()
 
     def add_item_to_cart(self, item_name: str) -> None:
-        item = self.page.locator("[data-test='inventory-item']", has_text=item_name)
-        item.locator("[data-test*='add-to-cart']").click()
+        with allure.step(f"Add '{item_name}' to cart"):
+            item = self.page.locator("[data-test='inventory-item']", has_text=item_name)
+            item.locator("[data-test*='add-to-cart']").click()
 
     def go_to_cart(self) -> None:
-        self.page.locator("[data-test='shopping-cart-link']").click()
+        with allure.step("Go to cart"):
+            self.page.locator("[data-test='shopping-cart-link']").click()

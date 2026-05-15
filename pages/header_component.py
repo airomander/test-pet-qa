@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 
@@ -19,8 +20,10 @@ class HeaderComponent:
         return int(self.cart_badge.text_content())
 
     def go_to_cart(self) -> None:
-        self.cart_link.click()
+        with allure.step("Navigate to cart via header"):
+            self.cart_link.click()
 
     def logout(self) -> None:
-        self.menu_button.click()
-        self.logout_link.click()
+        with allure.step("Logout from application"):
+            self.menu_button.click()
+            self.logout_link.click()

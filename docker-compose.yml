@@ -1,0 +1,9 @@
+services:
+  tests:
+    build: .
+    environment:
+      - SAUCE_HEADLESS=true
+      - SAUCE_REQRES_API_KEY=${SAUCE_REQRES_API_KEY:-}
+    volumes:
+      - ./allure-results:/app/allure-results
+    command: pytest tests/ -v --alluredir=allure-results
