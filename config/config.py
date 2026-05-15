@@ -10,6 +10,7 @@ class Config(BaseSettings):
     password: str = "secret_sauce"
     timeout: int = 30_000
     headless: bool = False
+    reqres_api_key: str = ""
 
     model_config = {"env_prefix": "SAUCE_", "env_file": ".env"}
 
