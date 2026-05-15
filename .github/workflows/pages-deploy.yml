@@ -22,25 +22,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download all allure results
+      - name: Download Allure report artifact
         uses: actions/download-artifact@v4
         with:
-          pattern: allure-results-*
-          path: allure-results-download
-          merge-multiple: true
+          name: allure-report
+          path: allure-report
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-
-      - name: Generate Allure report
-        uses: simple-elf/allure-report-action@v1.11
-        with:
-          allure_results: allure-results-download
-          allure_history: allure-history
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: allure-history
+          path: allure-report
 
       - name: Deploy to GitHub Pages
         id: deployment
